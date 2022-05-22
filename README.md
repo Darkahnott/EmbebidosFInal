@@ -28,7 +28,7 @@ Tutorial
 	sudo apt-get install python3-pygame
 
 3.  Download the files from the repository:
-    git clone https://github.com/Darkahnott/EmbebidosFInal.git 
+    git clone https://github.com/Darkahnott/ears_ffpj_ProyectoFInal.git
 
 4.  Run the program using the following command:
     python3 Nombre.py 
