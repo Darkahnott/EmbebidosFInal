@@ -1,4 +1,4 @@
-# EmbebidosFInal
+# Fundamentals of Embedded Systems - Final Project: Multimedia Center
 This repository contains all the work done for the final project of the course.
 
 
