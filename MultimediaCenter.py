@@ -14,7 +14,6 @@
 # ## #############################################################
 
 from tkinter import *
-from tkinter import ttk
 from pygame import mixer
 import webbrowser
 import ctypes
@@ -28,16 +27,16 @@ x11.XInitThreads()
 
 
 #Function to open the desired service using the default web browser
-def Spotify():
-	webbrowser.open("https://www.spotify.com/login",new=2, autoraise=True)
+def HBO():
+	webbrowser.open("https://play.hbomax.com/login",new=2, autoraise=True)
 
 #Function to open the desired service using the default web browser
 def Deezer():
 	webbrowser.open("https://www.deezer.com/login",new=2, autoraise=True)
 
 #Function to open the desired service using the default web browser
-def Tidal():
-	webbrowser.open("https://www.tidal.com/login",new=2, autoraise=True)
+def Youtube():
+	webbrowser.open("https://www.youtube.com/",new=2, autoraise=True)
 
 #Function to open the desired service using the default web browser
 def Netflix():
@@ -61,8 +60,13 @@ def USBNav(root):
 	#Starting the window with the desired styling
 	wind2 = Tk()
 	wind2.title("USB Selection Screen")
-	wind2.geometry('500x500')
+	wind2.geometry('500x400')
 	wind2.config(bg="#8dc3d5")
+
+	bg=(PhotoImage(file = "Resources/img/back/logo3.png"))
+	#Setting up the label
+	Start=Label(wind2,text="Media Center",image=bg)
+	Start.pack()
 
 	#Managing the USB filesystems
 
@@ -81,21 +85,21 @@ def USBNav(root):
 	if len(USBS) > 0:
 		#Creating and styling the button to "Enter the USB"
 		USBButton1=Button(wind2,text= "Device: "+USBS[0],bg="#F64A5C",command=lambda:EnterUSB(wind2,USBS[0]))
-		USBButton1.place(x=100,y=100)
+		USBButton1.place(x=190,y=100)
 
 		if len(USBS) > 1:
 			#Creating and styling the button to "Enter the USB"
 			USBButton2=Button(wind2,text= "Device: "+USBS[0],bg="#4AD55F",command=lambda:EnterUSB(wind2,USBS[1]))
-			USBButton2.place(x=200,y=100)
+			USBButton2.place(x=190,y=180)
 
 			if len(USBS) > 2:
 				#Creating and styling the button to "Enter the USB"
 				USBButton3=Button(wind2,text= "Device: "+USBS[0],bg="#ECEA4E",command=lambda:EnterUSB(wind2,USBS[2]))
-				USBButton3.place(x=300,y=100)
+				USBButton3.place(x=190,y=260)
 
 	#Control buttons, allows you to go back to the previous menu
-	GoBack=Button(wind2,text="Return to prevoius menu",bg="#F3CA65",command=lambda:MainMenu(wind2))
-	GoBack.place(x=180,y=200)
+	GoBack=Button(wind2,text="Return to previous menu",bg="#F3CA65",command=lambda:MainMenu(wind2))
+	GoBack.place(x=160,y=340)
 
 	#New device detecting cycle
 	try:
@@ -110,7 +114,7 @@ def USBNav(root):
 				#Else we create a new window with the retrieved info
 				USBNav(wind2)
 	except:
-		print("Hello there!")
+		print("Hello there! A window has been refreshed")
 
 #Function to show the different media players
 def EnterUSB(root,usb):
@@ -120,25 +124,37 @@ def EnterUSB(root,usb):
 
 	#Starting the window with the desired styling
 	wind3 = Tk()
-	wind3.title("Reproductor")
-	wind3.geometry('500x500')
-	wind3.config(bg="#66D8C6")
+	wind3.title("Media Player")
+	wind3.geometry('500x400')
+
+	bg1=(PhotoImage(file = "Resources/img/back/logo2.png"))
+	#Setting up the label
+	Test=Label(wind3,image=bg1)
+	Test.pack()
+	
 	
 	#Show the button to choose to play "Music"
-	botonMusica=Button(wind3,text="Music",bg="#66D863",command=lambda:playMusic(wind3,usb))
-	botonMusica.place(x=90,y=30) 
+	MusicIMG=PhotoImage(file='Resources/img/buttons/Music.png')
+	MusicButton=Button(wind3,image=MusicIMG,command=lambda:playMusic(wind3,usb),width=90,height=50,bg='black')
+	MusicButton.place(x=90,y=150) 
 	
 	#Show the button to choose to play "Videos"
-	botonVideo=Button(wind3,text="Videos",bg="#A272E4",command=lambda:playVideo(wind3,usb))
-	botonVideo.place(x=240,y=30)
+	VideoIMG=PhotoImage(file='Resources/img/buttons/Video.png')
+	VideoButton=Button(wind3,image=VideoIMG,command=lambda:playVideo(wind3,usb),width=90,height=50,bg='black')
+	VideoButton.place(x=220,y=150)
 	
 	#Show the button to choose to watch "Images"
-	botonImagen=Button(wind3,text="Photos",bg="#69A6E7",command=lambda:playImage(wind3,usb))
-	botonImagen.place(x=360,y=30)
+	PhotoIMG=PhotoImage(file='Resources/img/buttons/Photo.png')
+	PhotoButton=Button(wind3,image=PhotoIMG,command=lambda:playImage(wind3,usb),width=90,height=50,bg='black')
+	PhotoButton.place(x=350,y=150)
+
+
 
 	#Control buttons, allows you to go back to the previous menu
-	GoBack=Button(wind3,text="Return to prevoius menu",bg="#F3CA65",command=lambda:USBNav(wind3))
-	GoBack.place(x=150,y=150)
+	GoBack=Button(wind3,text="Return to previous menu",bg="#F3CA65",command=lambda:USBNav(wind3))
+	GoBack.place(x=160,y=340)
+
+	wind3.mainloop()
 
 
 #Function that manages the use cases for wether the device was disconnected or its empty
@@ -150,16 +166,16 @@ def Unplugged(root,usb):
 	#Starting the window with the desired styling
 	windTemp = Tk()
 	windTemp.title("Device offline")
-	windTemp.geometry('500x500')
+	windTemp.geometry('500x400')
 	windTemp.config(bg="#5FCC8F")
 
 	#Error message
-	textoTemp=Label(windTemp,text="Error while reading the device: "+usb+"\nCheck if it contains valid files or if it is still connected.")
-	textoTemp.place(x=150,y=100)
+	errorMSG=Label(windTemp,text="Error while reading the device: "+usb+"\nCheck if it contains valid files or if it is still connected.")
+	errorMSG.place(x=60,y=100)
 
 	#Control buttons, allows you to go back to the previous menu
-	GoBack=Button(windTemp,text="Regresar",bg="#F64A5C",command=lambda:USBNav(windTemp))
-	GoBack.place(x=250,y=200)
+	GoBack=Button(windTemp,text="Return to previous menu",bg="#F64A5C",command=lambda:USBNav(windTemp))
+	GoBack.place(x=160,y=340)
 
 
 #Function Music player
@@ -170,9 +186,14 @@ def playMusic(root,usb):
 
 	#Starting the window with the desired styling
 	wind4 = Tk()
-	wind4.title("Musica")
-	wind4.geometry('500x500')
-	wind4.config(bg="#66D863")
+	wind4.title("Music library")
+	wind4.geometry('500x400')
+
+	bg=(PhotoImage(file = "Resources/img/back/logo5.png"))
+
+	#Setting up the label
+	Start=Label(wind4,text="Media Center",image=bg)
+	Start.pack()
 
 	try:
 		#Getting all the files from the device
@@ -211,7 +232,7 @@ def playMusic(root,usb):
 			NoMusic.pack()
 
 			#Control buttons, allows you to go back to the previous menu
-			GoBack=Button(wind4,text="Elegir otro reproductor",command=lambda:EnterUSB(wind4,usb))
+			GoBack=Button(wind4,text="Return to media selection",command=lambda:EnterUSB(wind4,usb))
 			GoBack.pack()
 
 		else:
@@ -219,6 +240,7 @@ def playMusic(root,usb):
 			#Listing the labeled array
 			for song in MusicList:
 				TextSong=Label(wind4,text=song)
+				NameSong = song
 				TextSong.pack()
 
 			#Initializing the player with the first song of the list
@@ -281,30 +303,206 @@ def playMusic(root,usb):
 				#Play the file
 				mixer.music.play()
 
+
+			
+
 			#Creating and styling the button to "Play previous song"
-			PrevSongButton=Button(wind4,text="<<",bg="#F1C659",command=lambda:PrevSong(NumSong))
-			PrevSongButton.place(x=20,y=90)
+			PrevSongIMG=PhotoImage(file='Resources/img/buttons/Prev.png')
+			PrevSongButton=Button(wind4,image=PrevSongIMG,command=lambda:PrevSong(NumSong),width=30,height=30,bg='black')
+			PrevSongButton.place(x=150,y=200)
 
 			#Creating and styling the button to "Pause song"
-			PauseButton=Button(wind4,text="||",bg="#F1C659",command=lambda:mixer.music.pause())
-			PauseButton.place(x=150,y=90)
+			PauseSongIMG=PhotoImage(file='Resources/img/buttons/Pause.png')
+			PauseButton=Button(wind4,image=PauseSongIMG,command=lambda:mixer.music.pause(),width=30,height=30,bg='black')
+			PauseButton.place(x=200,y=200)
 
 			#Creating and styling the button to "Play"
-			ResumeButton=Button(wind4,text=" > ",bg="#F1C659",command=lambda:mixer.music.unpause())
-			ResumeButton.place(x=250,y=90)
+			PlaySongIMG=PhotoImage(file='Resources/img/buttons/Play.png')
+			ResumeButton=Button(wind4,image=PlaySongIMG,command=lambda:mixer.music.unpause(),width=30,height=30,bg='black')
+			ResumeButton.place(x=250,y=200)
 
 			#Creating and styling the button to "Play next song"
-			NextSongButton=Button(wind4,text=">>",bg="#F1C659",command=lambda:NextSong(NumSong))
-			NextSongButton.place(x=400,y=90)
+			NextSongIMG=PhotoImage(file='Resources/img/buttons/Next.png')
+			NextSongButton=Button(wind4,image=NextSongIMG,command=lambda:NextSong(NumSong),width=30,height=30,bg='black')
+			NextSongButton.place(x=300,y=200)
+
+			#Listening to
+			NameSongButton=Button(wind4,text="You are listening to: "+NameSong,bg="black",state=DISABLED)
+			NameSongButton.place(x=120,y=10)
 
 			#Creating and styling the button to "Exit the media player"
 			ExitButton=Button(wind4,text="Return to media selection",bg="#66D8C6",command=lambda:ExitMedia(wind4,usb))
-			ExitButton.place(x=200,y=200)
+			ExitButton.place(x=160,y=340)
+
+			
+			wind4.mainloop()
+
 	except:
 		#In case we cannot access the USB
 		Unplugged(wind4,usb)
 
 
+
+#Video player
+def playVideo(root,usb):
+	root.destroy()
+	#Styling and creating window
+	wind5 = Tk()
+	wind5.title("Video Player")
+	wind5.geometry('500x400')
+	wind5.config(bg="#A272E4")
+
+	
+
+	try:
+		#Getting all the files from the device
+
+		#For use on a raspberryPI uncomment the following line
+		#path = "/media/pi/" + usb
+
+		#For use on a linux filesystem uncomment the following line
+		path = "/media/"+os.getlogin()+"/" + usb
+
+		#Creamos una lista con todos los files dentro de la usb
+		files = os.listdir(path)
+
+		#Creating an aray to save the files
+		VidList = []
+
+		#Looking for valid files
+		for item in files:
+			#Filtering all .mp4 files
+			if item.endswith(".mp4"):
+				VidList.append(item)
+
+		#Array control
+		if len(VidList) == 0:
+			#Error message
+			NoIMG=Label(wind5,text="The device has no valid video files")
+			NoIMG.pack()
+
+			#Control buttons, allows you to go back to the previous menu
+			GoBack=Button(wind5,text="Go back to media selection",command=lambda:EnterUSB(wind5,usb))
+			GoBack.pack()
+
+		else:
+
+			#Make an array of functions for the player
+			MediaP=[]
+			#Start the player
+			media = vlc.MediaPlayer(path+"/"+VidList[0])
+			MediaP.append(media)
+
+			#Video Player
+			def PlayVid(lista,path,MediaP):
+				#Stop video
+				MediaP[0].stop()
+				#Assign the route
+				MediaP[0] = vlc.MediaPlayer(path+"/"+typeV.get())
+				#Play the file
+				MediaP[0].play()
+
+			#Stop the media player
+			def ExitMedia(root,usb,MediaP):
+				#Stop video
+				MediaP[0].stop()
+				#Exit to media menu
+				EnterUSB(root,usb)
+
+			#Listing the labeled array
+			typeV=StringVar(value="a")
+			for video in VidList:
+				Radiobutton(wind5,text=video,variable=typeV,value=video,command=lambda:PlayVid(VidList,path,MediaP)).pack()
+
+
+			bg=(PhotoImage(file = "Resources/img/back/logo4.png"))
+			#Setting up the label
+			Start=Label(wind5,image=bg)
+			Start.pack()
+
+			#Creating and styling the button to "Exit the media player"
+			ExitButton=Button(wind5,text="Go back to media selection",bg="#66D8C6",command=lambda:ExitMedia(wind5,usb,MediaP))
+			ExitButton.place(x=160,y=340)
+
+			wind5.mainloop()
+
+	except:
+		#In case we cannot access the USB
+		Unplugged(wind5,usb)
+
+#Image player
+def playImage(root,usb):
+	root.destroy()
+	#Styling and creating window
+	wind6 = Tk()
+	wind6.title("Photo Player")
+	wind6.geometry('500x400')
+	wind6.config(bg="#69A6E7")
+
+	bg=(PhotoImage(file = "Resources/img/back/logo6.png"))
+	#Setting up the label
+	Start=Label(wind6,text="Photos",image=bg)
+	Start.pack()
+
+
+
+	try:
+		#Getting all the files from the device
+
+		#For use on a raspberryPI uncomment the following line
+		#path = "/media/pi/" + usb
+
+		#For use on a linux filesystem uncomment the following line
+		path = "/media/"+os.getlogin()+"/" + usb
+
+
+		#Listing all the files
+		files = os.listdir(path)
+
+		#Filtered list
+		IMGList = []
+
+		#lookin for files
+		for item in files:
+			#Filtering all .jpg & .png files
+			if item.endswith((".jpg",".png")):
+				IMGList.append(item)
+
+		#List control
+		if len(IMGList) == 0:
+
+			#Error message
+			NoIMG=Label(wind6,text="The current device has no valid images.")
+			NoIMG.pack()
+
+			#Control buttons, allows you to go back to the previous menu
+			GoBack=Button(wind6,text="Go back to media selection",command=lambda:EnterUSB(wind6,usb))
+			GoBack.pack()
+
+		else:
+			#Img Player
+			def ShowIMG(album):
+				for img in IMGList:
+					media = vlc.MediaPlayer(path+"/"+img)
+					media.play()
+					#A little delay
+					time.sleep(3)
+					#Stop the player
+					media.stop()
+            
+            #Creating and styling the button to "Start slideshow"
+			botonRepetir=Button(wind6,text="Slideshow",bg="#F3CA65",command=lambda:ShowIMG(IMGList))
+			botonRepetir.place(x=220,y=160)
+
+			#Control buttons, allows you to go back to the previous menu
+			ExitButton=Button(wind6,text="Go back to media selection",bg="#66D8C6",command=lambda:EnterUSB(wind6,usb))
+			ExitButton.place(x=160,y=340)
+
+
+			wind6.mainloop()
+	except:
+		#In case we cannot access the USB
+		Unplugged(wind6,usb)
 
 
 #Main menu funtion, works as the event handler and hub that calls the specific function when needed
@@ -313,48 +511,52 @@ def MainMenu(root):
 	#Creating and styling window
 	wind1 = Tk()
 	wind1.title("Media Center")
-	wind1.geometry('500x500')
-	wind1.config(bg="#8dc3d5")
+	wind1.geometry('500x400')
+
+	bg=(PhotoImage(file = "Resources/img/back/logo.png"))
+	#Setting up the label
+	Start=Label(wind1,text="Media Center",image=bg)
+	Start.pack()
     
-    #Creating the button and styling it, the calling the function of the service: Spotify
-	SpotifyIMG=PhotoImage(file='Resources/img/buttons/')
-	SpotifyButton=Button(wind1,image=SpotifyIMG,command=Spotify)
-	SpotifyButton.place(x=20,y=30) #Marcamos las coordenadas del boton
+    #Creating the button and styling it, the calling the function of the service: HBO
+	HBOIMG=PhotoImage(file='Resources/img/buttons/HBO.png')
+	HBOButton=Button(wind1,image=HBOIMG,command=HBO,width=90,height=50,bg='black')
+	HBOButton.place(x=20,y=30)
 	
 	#Creating the button and styling it, the calling the function of the service: Deezer
-	DeexerIMG=PhotoImage(file='Resources/img/buttons/')
-	DeexerButton=Button(wind1,image=DeexerIMG,command=Deezer)
+	DeexerIMG=PhotoImage(file='Resources/img/buttons/Deezer.png')
+	DeexerButton=Button(wind1,image=DeexerIMG,command=Deezer,width=90,height=50,bg='black')
 	DeexerButton.place(x=200,y=30)
 	
-	#Creating the button and styling it, the calling the function of the service: Tidal
-	TidalIMG=PhotoImage(file='Resources/img/buttons/')
-	TidalButton=Button(wind1,image=TidalIMG,command=Tidal)
-	TidalButton.place(x=380,y=30)
+	#Creating the button and styling it, the calling the function of the service: Youtube
+	YoutubeIMG=PhotoImage(file='Resources/img/buttons/Youtube.png')
+	YoutubeButton=Button(wind1,image=YoutubeIMG,command=Youtube,width=90,height=50,bg='black')
+	YoutubeButton.place(x=380,y=30)
     
     #Creating the button and styling it, the calling the function of the service: Netflix
-	NetflixIMG=PhotoImage(file='Resources/img/buttons/')
-	NetflixButton=Button(wind1,image=NetflixIMG,command=Netflix)
-	NetflixButton.place(x=20,y=90)
+	NetflixIMG=PhotoImage(file='Resources/img/buttons/Netflix.png')
+	NetflixButton=Button(wind1,image=NetflixIMG,command=Netflix,width=90,height=50,bg='black')
+	NetflixButton.place(x=20,y=150)
 	
 	#Creating the button and styling it, the calling the function of the service: Prime
-	PrimeIMG=PhotoImage(file='Resources/img/buttons/') 
-	PrimeButton=Button(wind1,image=PrimeIMG,command=PrimeVideo)
-	PrimeButton.place(x=200,y=90)
+	PrimeIMG=PhotoImage(file='Resources/img/buttons/Prime.png') 
+	PrimeButton=Button(wind1,image=PrimeIMG,command=PrimeVideo,width=90,height=50,bg='black')
+	PrimeButton.place(x=200,y=150)
 	
 	#Creating the button and styling it, the calling the function of the service: D+
-	DPlusIMG=PhotoImage(file='Resources/img/buttons/')
-	DPlusButton=Button(wind1,image=DPlusIMG,command=Disneyplus)
-	DPlusButton.place(x=380,y=90)
+	DPlusIMG=PhotoImage(file='Resources/img/buttons/Disney+.png')
+	DPlusButton=Button(wind1,image=DPlusIMG,command=Disneyplus,width=90,height=50,bg='black')
+	DPlusButton.place(x=380,y=150)
 	
 	##Creating the button and styling it, the calling the function of the service: USB handler
-	USBIMG=PhotoImage(file='Resources/img/buttons/')
-	USBButton=Button(wind1,image=USBIMG,command=lambda:USBNav(wind1))
-	USBButton.place(x=220,y=170) 
+	USBIMG=PhotoImage(file='Resources/img/buttons/USB.png')
+	USBButton=Button(wind1,image=USBIMG,command=lambda:USBNav(wind1),width=90,height=50,bg='black')
+	USBButton.place(x=200,y=250) 
 	   
 	#Creating the button and styling it, the calling the function of the service: Close and kill
-	ExitIMG=PhotoImage(file='Resources/img/buttons/') 
-	ExitButton=Button(wind1,image=ExitIMG,command=lambda:wind1.destroy())
-	ExitButton.place(x=180,y=270) 
+	ExitIMG=PhotoImage(file='Resources/img/buttons/Exit.png') 
+	ExitButton=Button(wind1,image=ExitIMG,command=lambda:wind1.destroy(),width=90,height=50,bg='black')
+	ExitButton.place(x=200,y=340)
 
 	wind1.mainloop()
 
@@ -366,7 +568,7 @@ def main():
 	usr = os.getlogin()
 	wind0 = Tk()
 	wind0.title("Media Center - Welcome "+usr)
-	wind0.geometry('500x500')
+	wind0.geometry('500x400')
 	
 	bg=(PhotoImage(file = "Resources/img/back/1.png"))
 
@@ -375,8 +577,8 @@ def main():
 	Start.pack()
 	
 	#Creating a button to call the other fuctions adn the rest of the program
-	StartIMG=PhotoImage(file='inicio.png')
-	StartBTTN=Button(wind0,image=StartIMG,command=lambda:MainMenu(wind0))
+	StartIMG=PhotoImage(file='Resources/img/buttons/Inicio.png')
+	StartBTTN=Button(wind0,image=StartIMG,command=lambda:MainMenu(wind0),width=90,height=50,bg='black')
 	StartBTTN.place(x=200,y=200)  
 
 	wind0.mainloop()
