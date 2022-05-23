@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# ## #############################################################
+# ## #########################################################################################################################################
 # MultimediaCenter.py
 #
 # Authors:  Saúl Abraham Esparza Rivera & Paul Jaime Félix Flores
-# Licence: MIT
+# 
 # Date:    21/05/2022
 # 
 # A multimedia center that allows you to connect to your
 # favorite streaming sites and also let's you enjoy your
 # own media files (music, video and images) on it.
 #
-# ## #############################################################
+# ## #########################################################################################################################################
+
 
 from tkinter import *
 from pygame import mixer
@@ -24,6 +25,36 @@ import time
 #Loading the cdll for display porpuses
 x11 = ctypes.cdll.LoadLibrary('libX11.so')
 x11.XInitThreads()
+
+############################################################### MAIN ########################################################################
+
+
+#Function to desplay the welcome screen
+def main():
+
+	#Window dimmensions and other properties
+	usr = os.getlogin()
+	wind0 = Tk()
+	wind0.title("Media Center - Welcome "+usr)
+	wind0.geometry('500x400')
+	
+	bg=(PhotoImage(file = "Resources/img/back/1.png"))
+
+	#Setting up the label
+	Start=Label(wind0,text="Media Center",image=bg)
+	Start.pack()
+	
+	#Creating a button to call the other fuctions adn the rest of the program
+	StartIMG=PhotoImage(file='Resources/img/buttons/Inicio.png')
+	StartBTTN=Button(wind0,image=StartIMG,command=lambda:MainMenu(wind0),width=90,height=50,bg='black')
+	StartBTTN.place(x=200,y=200)  
+
+	wind0.mainloop()
+
+
+
+############################################################### SERVICES ###################################################################
+
 
 
 #Function to open the desired service using the default web browser
@@ -49,6 +80,8 @@ def PrimeVideo():
 #Function to open the desired service using the default web browser
 def Disneyplus():
 	webbrowser.open("https://www.disneyplus.com/login",new=2, autoraise=True)
+
+############################################################### USB ###################################################################
 
 
 #Function to show the available USB directories
@@ -151,7 +184,7 @@ def EnterUSB(root,usb):
 
 
 	#Control buttons, allows you to go back to the previous menu
-	GoBack=Button(wind3,text="Return to previous menu",bg="#F3CA65",command=lambda:USBNav(wind3))
+	GoBack=Button(wind3,text="Return to usb selector",bg="#F3CA65",command=lambda:USBNav(wind3))
 	GoBack.place(x=160,y=340)
 
 	wind3.mainloop()
@@ -176,6 +209,8 @@ def Unplugged(root,usb):
 	#Control buttons, allows you to go back to the previous menu
 	GoBack=Button(windTemp,text="Return to previous menu",bg="#F64A5C",command=lambda:USBNav(windTemp))
 	GoBack.place(x=160,y=340)
+
+############################################################### MUSIC ###################################################################
 
 
 #Function Music player
@@ -328,7 +363,7 @@ def playMusic(root,usb):
 
 			#Listening to
 			NameSongButton=Button(wind4,text="You are listening to: "+NameSong,bg="black",state=DISABLED)
-			NameSongButton.place(x=120,y=10)
+			NameSongButton.place(x=7,y=10)
 
 			#Creating and styling the button to "Exit the media player"
 			ExitButton=Button(wind4,text="Return to media selection",bg="#66D8C6",command=lambda:ExitMedia(wind4,usb))
@@ -341,6 +376,7 @@ def playMusic(root,usb):
 		#In case we cannot access the USB
 		Unplugged(wind4,usb)
 
+############################################################### VIDEO ###################################################################
 
 
 #Video player
@@ -374,6 +410,7 @@ def playVideo(root,usb):
 			#Filtering all .mp4 files
 			if item.endswith(".mp4"):
 				VidList.append(item)
+	        
 
 		#Array control
 		if len(VidList) == 0:
@@ -421,7 +458,7 @@ def playVideo(root,usb):
 			Start.pack()
 
 			#Creating and styling the button to "Exit the media player"
-			ExitButton=Button(wind5,text="Go back to media selection",bg="#66D8C6",command=lambda:ExitMedia(wind5,usb,MediaP))
+			ExitButton=Button(wind5,text="Return to media selection",bg="#66D8C6",command=lambda:ExitMedia(wind5,usb,MediaP))
 			ExitButton.place(x=160,y=340)
 
 			wind5.mainloop()
@@ -429,6 +466,8 @@ def playVideo(root,usb):
 	except:
 		#In case we cannot access the USB
 		Unplugged(wind5,usb)
+
+############################################################### PHOTOS ###################################################################
 
 #Image player
 def playImage(root,usb):
@@ -476,7 +515,7 @@ def playImage(root,usb):
 			NoIMG.pack()
 
 			#Control buttons, allows you to go back to the previous menu
-			GoBack=Button(wind6,text="Go back to media selection",command=lambda:EnterUSB(wind6,usb))
+			GoBack=Button(wind6,text="Return to media selection",command=lambda:EnterUSB(wind6,usb))
 			GoBack.pack()
 
 		else:
@@ -495,7 +534,7 @@ def playImage(root,usb):
 			botonRepetir.place(x=220,y=160)
 
 			#Control buttons, allows you to go back to the previous menu
-			ExitButton=Button(wind6,text="Go back to media selection",bg="#66D8C6",command=lambda:EnterUSB(wind6,usb))
+			ExitButton=Button(wind6,text="Return to media selection",bg="#66D8C6",command=lambda:EnterUSB(wind6,usb))
 			ExitButton.place(x=160,y=340)
 
 
@@ -504,6 +543,7 @@ def playImage(root,usb):
 		#In case we cannot access the USB
 		Unplugged(wind6,usb)
 
+############################################################### PRINCIPAL ###########################################################
 
 #Main menu funtion, works as the event handler and hub that calls the specific function when needed
 def MainMenu(root):
@@ -560,27 +600,6 @@ def MainMenu(root):
 
 	wind1.mainloop()
 
-
-#Function to desplay the welcome screen
-def main():
-
-	#Window dimmensions and other properties
-	usr = os.getlogin()
-	wind0 = Tk()
-	wind0.title("Media Center - Welcome "+usr)
-	wind0.geometry('500x400')
-	
-	bg=(PhotoImage(file = "Resources/img/back/1.png"))
-
-	#Setting up the label
-	Start=Label(wind0,text="Media Center",image=bg)
-	Start.pack()
-	
-	#Creating a button to call the other fuctions adn the rest of the program
-	StartIMG=PhotoImage(file='Resources/img/buttons/Inicio.png')
-	StartBTTN=Button(wind0,image=StartIMG,command=lambda:MainMenu(wind0),width=90,height=50,bg='black')
-	StartBTTN.place(x=200,y=200)  
-
-	wind0.mainloop()
-
 main()
+
+
