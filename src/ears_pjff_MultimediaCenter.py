@@ -11,6 +11,7 @@
 # favorite streaming sites and also let's you enjoy your
 # own media files (music, video and images) on it.
 #
+# Licence: MIT
 # ## #########################################################################################################################################
 
 
