@@ -46,7 +46,7 @@ Tutorial
 	 * sudo apt-get install python3-pygame
 
 3.  Download the files from the repository:
-    git clone https://github.com/Darkahnott/ears_ffpj_ProyectoFInal.git
+    git clone https://github.com/Darkahnott/ears_pjff_FinalProject
 
 4.  Run the program using the following command:
     python3 ears_pjff_MultimediaCenter.py 
