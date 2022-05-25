@@ -1,4 +1,22 @@
 # Fundamentals of Embedded Systems - Final Project: Multimedia Center
+
+* ** *****************************************************************************************************************************************
+* MultimediaCenter.py
+
+* Authors:  Saúl Abraham Esparza Rivera & Paul Jaime Félix Flores
+
+* Date:    26/05/2022
+
+* A multimedia center that allows you to connect to your
+* favorite streaming sites and also let's you enjoy your
+* own media files (music, video and images) on it.
+
+* Licence: MIT
+
+* ** *****************************************************************************************************************************************
+
+
+
 This repository contains all the work done for the final project of the course.
 
 
@@ -14,23 +32,23 @@ Tutorial
 2. Enter the following commands to install the necessary libraries/programs:
 
 	Programs:
-	sudo apt-get update //If you're using ubuntu this line gets you the latest Firefox version
-	sudo apt-get install firefox //Just in case you don't have it
-	sudo apt-get install vlc
-	sudo apt-get install git
+	 * sudo apt-get update //If you're using ubuntu this line gets you the latest Firefox version
+	 * sudo apt-get install firefox //Just in case you don't have it
+	 * sudo apt-get install vlc
+	 * sudo apt-get install git
 
 	Libraries:
-	pip3 install python-vlc
-	sudo apt-get install libx11-dev
-	sudo apt-get install xauth dbus-x11
-	sudo apt-get install python
-	sudo apt-get install python3-tk
-	sudo apt-get install python3-pygame
+	 * pip3 install python-vlc
+	 * sudo apt-get install libx11-dev
+	 * sudo apt-get install xauth dbus-x11
+	 * sudo apt-get install python
+	 * sudo apt-get install python3-tk
+	 * sudo apt-get install python3-pygame
 
 3.  Download the files from the repository:
     git clone https://github.com/Darkahnott/ears_ffpj_ProyectoFInal.git
 
 4.  Run the program using the following command:
-    python3 Nombre.py 
+    python3 MultimediaCenter.py 
 
 5.  Enjoy.
