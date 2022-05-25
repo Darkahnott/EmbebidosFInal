@@ -49,6 +49,6 @@ Tutorial
     git clone https://github.com/Darkahnott/ears_ffpj_ProyectoFInal.git
 
 4.  Run the program using the following command:
-    python3 MultimediaCenter.py 
+    python3 ears_pjff_MultimediaCenter.py 
 
 5.  Enjoy.
