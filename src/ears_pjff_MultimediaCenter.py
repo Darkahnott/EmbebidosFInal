@@ -544,7 +544,7 @@ def playImage(root,usb):
 		#In case we cannot access the USB
 		Unplugged(wind6,usb)
 
-############################################################### PRINCIPAL ###########################################################
+############################################################### Main Menu ###########################################################
 
 #Main menu funtion, works as the event handler and hub that calls the specific function when needed
 def MainMenu(root):
